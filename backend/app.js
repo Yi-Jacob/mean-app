@@ -8,13 +8,15 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/node-angular?retryWrites=true"
+    "mongodb+srv://jacob:f9bEl2EMqiNT1cGM@mean-app.joh2k8a.mongodb.net/mean-app?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
   )
   .then(() => {
     console.log("Connected to database!");
   })
-  .catch(() => {
+  .catch((err) => {
     console.log("Connection failed!");
+    console.log(err);
   });
 
 app.use(bodyParser.json());
