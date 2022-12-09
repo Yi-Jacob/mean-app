@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,17 +9,20 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://jacob:f9bEl2EMqiNT1cGM@mean-app.joh2k8a.mongodb.net/mean-app?retryWrites=true&w=majority"
+    "mongodb+srv://jacob:f9bEl2EMqiNT1cGM@mean-app.joh2k8a.mongodb.net/mean-app?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
   )
   .then(() => {
     console.log("Connected to database!");
   })
-  .catch(() => {
+  .catch((err) => {
     console.log("Connection failed!");
+    console.log(err)
   });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/images", express.static(path.join("backend/images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
