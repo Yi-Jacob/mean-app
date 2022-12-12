@@ -10,8 +10,9 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://jacob:f9bEl2EMqiNT1cGM@mean-app.joh2k8a.mongodb.net/mean-app?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
+    "mongodb+srv://jacob:" +
+      process.env.MONGO_ATLAS_PW +
+      "@mean-app.joh2k8a.mongodb.net/mean-app"
   )
   .then(() => {
     console.log("Connected to database!");
@@ -22,7 +23,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("backend/images")));
+app.use("/images", express.static(path.join("images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
